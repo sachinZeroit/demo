@@ -10,6 +10,7 @@ const randomstring = require('randomstring')
 // const { getMaxListeners } = require('../models/userModel')
 const sendResetPasswordMail = async(name,email,token)=>{
     try {
+        
         const transporter = nodemailer.createTransport({
             host:'smtp.gmail.com',
             port:587,
