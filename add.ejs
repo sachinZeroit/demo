@@ -1,0 +1,154 @@
+<%- include('../admin/layouts/head.ejs') -%>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<style>
+  .error{
+    color:red;
+  }
+</style>
+</head>
+
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+  <!-- Navbar -->
+  <%- include('../admin/layouts/navbar.ejs') -%>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <%- include('../admin/layouts/sidebar.ejs') -%>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper mt-3">
+    <!-- Content Header (Page header) -->
+        
+    <!-- /.content-header -->
+    <!-- Main content -->
+    
+    <div class="content">
+      
+        <section class="content">
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Add User</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form id="add_form" enctype="multipart/form-data">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Name</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                  </div> 
+                  
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" autocomplete="off">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Mobile</label>
+                    <input type="text" class="form-control" id="mobile" name="mobile">
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="exampleInputFile">File input</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="image custom-file-input" id="image" name="image">
+                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-info">Submit</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+
+            
+            <!-- /.card -->
+
+           
+            <!-- /.card -->
+           
+            <!-- /.card -->
+
+          </div>
+            <!-- /.container-fluid -->
+
+          </section>
+      <!-- /.container-fluid -->
+    </div>
+    
+    <!-- /.content -->
+  </div>
+  
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+  $(function(){
+    $("#add_form").validate({
+      rules:{
+        name:{
+          required:true,
+          minlength:3,
+          maxlength:100
+        },
+        email:{
+          required:true
+        },
+        password:{
+          required:true,
+          minlength:5,
+          maxlength:100
+        },
+        mobile:{
+          required:true,
+          number:true,
+          minlength:10,
+          maxlength:10
+        }
+      },
+      submitHandler: function () {
+        let form= $(this)[0];
+        let form_data = new FormData(form);    
+        $.ajax({
+          type:"post",
+          url:"/api/insert",
+          data:form_data,
+          contentType: false,
+          processData: false,
+          dataType: 'json',
+          success:function(response){
+            swal({
+              title: "Data insert succefully...",
+              // text: "Please check your email and password",
+              icon: "success",
+              button: "ok",
+            });
+          }
+        })
+      }
+    })
+  })
+</script>
+  <!-- Main Footer -->
+  <%- include('../admin/layouts/footer.ejs') -%>  
+</div>
+<!-- ./wrapper -->
+<%- include('../admin/layouts/foot.ejs') -%>
+<!-- REQUIRED SCRIPTS -->
